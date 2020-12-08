@@ -1,9 +1,10 @@
 import './App.css';
 import React from "react";
-import Nav from "./components/Nav";
-import Footer from "./components/Footer";
+import Nav from "./components/layouts/Nav";
+import Footer from "./components/layouts/Footer";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import Join from "./components/Join";
 import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
       <Switch>
         <Route exact path="/login" exact component={Login} />
         <Route exact path="/register" exact component={Register} />
-
+        <Route exact path="/join" exact component={Join} />
       </Switch>
       <Footer />
 
