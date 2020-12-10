@@ -18,10 +18,10 @@ const Login = () => {
 
     const submit = async (e) => {
         e.preventDefault();
-        const currentUser = { email, password };
+        const loginUser = { email, password };
         await Axios.post(
             "http://localhost:8080/api/login", 
-            currentUser
+            loginUser
         );
 
         await setVerifyMessage({
