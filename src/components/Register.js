@@ -37,19 +37,21 @@ const Register = () => {
         }
 
     }
-    const responseSuccessGoogle = (response) => {
+    const responseSuccessGoogle = async (response) => {
         console.log(response)
-        Axios.post("http:/localhost:8080/api/google-login",
-        {
-            tokenId: response.tokenId
-        }).then(response => {
-            console.log(response);
-        })
+        try {
+            const res = await Axios.post('http://localhost:8080/api/google-login', 
+            {tokenId: response.tokenId})
+
+            setVerifyMessage({
+                text: res.data.msg
+            })
+        } catch (err) {
+            err.response.data.msg && setError(err.response.data.msg);
+        }
     }
 
-    const responseErrorGoogle = (response) => {
-            console.log(response)
-    }
+    
 
 
 return (
@@ -80,7 +82,6 @@ return (
     clientId="310321453603-jj2qtlkeer5o2u30tdnf216knss728ia.apps.googleusercontent.com"
     buttonText={<p className="google-p">Login with Google</p>}
     onSuccess={responseSuccessGoogle}
-    onFailure={responseErrorGoogle}
     cookiePolicy={'single_host_origin'}
     />
 );
