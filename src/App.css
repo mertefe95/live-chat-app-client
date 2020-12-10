@@ -3,3 +3,43 @@
     margin: 0;
     box-sizing: 0;
 }
+
+.header {
+    background-color: red;
+    display: flex;
+    height: 20vh;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 40vh;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form > label {
+    padding: 10px 0;
+}
+
+ .form > button {
+     margin-top: 20px;
+ }
+
+ .form > ul{
+    list-style: none;
+    padding-top: 20px;
+    text-align: center;
+ }
+
+.form ul > li {
+    margin: 10px 0;
+}

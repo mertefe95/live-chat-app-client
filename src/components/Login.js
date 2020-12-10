@@ -1,68 +1,59 @@
-import React from "react";
-import {Formik, Form, ErrorMessage, Field } from "formik";
-import * as Yup from "yup";
+import React, { useState, useContext } from "react";
+import { useHistory, Link } from "react-router-dom";
 import Axios from "axios";
-
-const initialValues = {
-    email: '',
-    password: ''
-}
-
-const regEx = /^(?=.*[A-Z])(?=.*\d)/
-
-const validationSchema = Yup.object({
-    email: Yup.string().required('Required').email('Please enter a valid email.'),
-    password: Yup.string().required('Required').min(8, 'Password must be at least 8 characters.')
-    .matches(
-        regEx,
-            'Password must contain at least one Number and one Uppercase letter.'
-    )
-})
-
-const onSubmit = async (e) => {
-    e.preventDefault();
-
-
-}
-
+import UserContext from "./context/UserContext";
 
 
 const Login = () => {
 
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const [verifyMessage, setVerifyMessage] = useState({
+        text: undefined
+    });
 
-    return (
-
-        <Formik
-        initialValues={initialValues}
-        onSubmit={onSubmit}
-        validationSchema={validationSchema}>
-            <Form>
-
-            <label htmlFor="email">Email: </label>
-            <Field name="email" type="email" placeholder="Please enter your email..." />
-            <ErrorMessage name="email" />
-
-            <label>Password: </label>
-            <Field name="password" type="password" placeholder="Please enter your password..." />
-            <ErrorMessage name="password" />
+    const { setUserData } = useContext(UserContext);
+    const history = useHistory();
 
 
-            <span>
-            <p>User Login</p>
-            <p>Admin Login</p>
-            </span>
+    const submit = async (e) => {
+        e.preventDefault();
+        const currentUser = { email, password };
+        await Axios.post(
+            "http://localhost:8080/api/login", 
+            currentUser
+        );
 
-            </Form>
+        await setVerifyMessage({
+            text: "Please verify your email to proceed login."
+        })
 
-        </Formik>
-
-
-    )
-
+    }
 
 
+return (
+<div className="page">
+    <h2>Login</h2>
+
+    <h3>{verifyMessage.text}</h3>
+
+    <form className="form" onSubmit={submit}>
+
+        <label htmlFor="login-email">Email</label>
+        <input id="login-email" type="email" onChange={e => setEmail(e.target.value)} />
+
+        <label htmlFor="login-password">Password</label>
+        <input id="login-password" type="password" onChange={e => setPassword(e.target.value)} />
+
+        <button type="submit">Submit</button>
+
+        <ul>
+            <li><Link to="/forgot-password">Forgot your password?</Link></li>
+
+        </ul>
+    </form>
+</div>
+
+)
 }
-
-
-
 export default Login;
