@@ -6,6 +6,7 @@ import Register from "./components/Register";
 import ForgotPassword from "./components/ForgotPassword";
 import Login from "./components/Login";
 import AdminLogin from "./components/AdminLogin";
+import Homepage from "./components/Homepage";
 import Axios from "axios";
 import UserContext from "./components/context/UserContext";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
@@ -57,6 +58,7 @@ function App() {
         <Route exact path="/register" exact component={Register} />
         <Route exact path="/forgot-password" exact component={ForgotPassword} />
         <Route exact path="/admin-login" exact component={AdminLogin} />
+        <Route exact path="/" exact component={Homepage} />
       </Switch>
       <Footer />
       </UserContext.Provider>
