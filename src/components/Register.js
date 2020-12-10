@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import Axios from "axios";
 import UserContext from "./context/UserContext";
 import ErrorNotice from "./misc/ErrorNotice";
-
+import GoogleLogin from 'react-google-login';
 
 const Register = () => {
 
@@ -37,6 +37,9 @@ const Register = () => {
         }
 
     }
+    const responseGoogle = (response) => {
+    console.log(response);
+    }
 
 
 return (
@@ -59,6 +62,22 @@ return (
 
         <button type="submit">Submit</button>
     </form>
+
+    <p>Or</p>
+    <h2>Login with Google Account</h2>
+
+    <GoogleLogin
+    clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+    buttonText=<p className="google-p">Login with Google</p>
+    onSuccess={responseGoogle}
+    onFailure={responseGoogle}
+    cookiePolicy={'single_host_origin'}
+    />
+);
+
+
+    <p>Or</p>
+    <h2>Login with Facebook Account</h2>
 </div>
 
 )
