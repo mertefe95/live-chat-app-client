@@ -37,8 +37,18 @@ const Register = () => {
         }
 
     }
-    const responseGoogle = (response) => {
-    console.log(response);
+    const responseSuccessGoogle = (response) => {
+        console.log(response)
+        Axios.post("http:/localhost:8080/api/google-login",
+        {
+            tokenId: response.tokenId
+        }).then(response => {
+            console.log(response);
+        })
+    }
+
+    const responseErrorGoogle = (response) => {
+            console.log(response)
     }
 
 
@@ -68,9 +78,9 @@ return (
 
     <GoogleLogin
     clientId="310321453603-jj2qtlkeer5o2u30tdnf216knss728ia.apps.googleusercontent.com"
-    buttonText=<p className="google-p">Login with Google</p>
-    onSuccess={responseGoogle}
-    onFailure={responseGoogle}
+    buttonText={<p className="google-p">Login with Google</p>}
+    onSuccess={responseSuccessGoogle}
+    onFailure={responseErrorGoogle}
     cookiePolicy={'single_host_origin'}
     />
 );
