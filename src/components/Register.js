@@ -67,7 +67,7 @@ return (
     <h2>Login with Google Account</h2>
 
     <GoogleLogin
-    clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+    clientId="310321453603-jj2qtlkeer5o2u30tdnf216knss728ia.apps.googleusercontent.com"
     buttonText=<p className="google-p">Login with Google</p>
     onSuccess={responseGoogle}
     onFailure={responseGoogle}
