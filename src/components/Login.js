@@ -17,16 +17,24 @@ const Login = () => {
 
 
     const submit = async (e) => {
+        
         e.preventDefault();
-        const loginUser = { email, password };
-        await Axios.post(
-            "http://localhost:8080/api/login", 
-            loginUser
-        );
 
-        await setVerifyMessage({
-            text: "Please verify your email to proceed login."
-        })
+        const loginUser = { email, password };
+        const loginRes = await Axios.post(
+            "http://localhost:8080/api/login", {
+                loginUser
+            });
+
+            setUserData({
+                token: loginRes.data.token,
+                user: loginRes.data.user
+            });
+
+            localStorage.setItem("auth-token", loginRes.data.token);
+            history.push("/");
+
+      
 
     }
 
@@ -49,7 +57,7 @@ return (
 
         <ul>
             <li><Link to="/forgot-password">Forgot your password?</Link></li>
-
+            <li><Link to="/admin-login">Login as Admin</Link></li>
         </ul>
     </form>
 </div>
