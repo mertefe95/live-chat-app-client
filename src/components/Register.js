@@ -2,21 +2,27 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import Axios from "axios";
 import UserContext from "./context/UserContext";
+import ErrorNotice from "./misc/ErrorNotice";
+
 
 const Register = () => {
 
     const [username, setUsername] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [error, setError] = useState();
     const [verifyMessage, setVerifyMessage] = useState({
         text: undefined
     });
+    
 
     const { setUserData } = useContext(UserContext);
     const history = useHistory();
 
     const submit = async (e) => {
         e.preventDefault();
+
+        try {
         const newUser = { username, email, password };
         await Axios.post(
             "http://localhost:8080/api/register", 
@@ -26,6 +32,9 @@ const Register = () => {
         await setVerifyMessage({
             text: "Please verify your email to proceed login."
         })
+        } catch (err) {
+            err.response.data.msg && setError(err.response.data.msg);
+        }
 
     }
 
@@ -35,6 +44,8 @@ return (
     <h2>Register</h2>
 
     <h3>{verifyMessage.text}</h3>
+
+    <h4>{error && <ErrorNotice message={error} clearError={() => setError(undefined)} />} </h4>
 
     <form className="form" onSubmit={submit}>
         <label htmlFor="register-username">Username</label>

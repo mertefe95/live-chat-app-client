@@ -2,12 +2,15 @@ import React, { useState, useContext } from "react";
 import { useHistory, Link } from "react-router-dom";
 import Axios from "axios";
 import UserContext from "./context/UserContext";
+import ErrorNotice from "./misc/ErrorNotice";
+
 
 
 const Login = () => {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [error, setError] = useState();
     const [verifyMessage, setVerifyMessage] = useState({
         text: undefined
     });
@@ -19,6 +22,8 @@ const Login = () => {
     const submit = async (e) => {
         
         e.preventDefault();
+
+        try {
 
         const loginUser = { email, password };
         const loginRes = await Axios.post(
@@ -33,7 +38,9 @@ const Login = () => {
 
             localStorage.setItem("auth-token", loginRes.data.token);
             history.push("/");
-
+        } catch (err) {
+            err.response.data.msg && setError(err.response.data.msg);
+        }
       
 
     }
@@ -44,6 +51,9 @@ return (
     <h2>Login</h2>
 
     <h3>{verifyMessage.text}</h3>
+
+    <h4>{error && <ErrorNotice message={error} clearError={() => setError(undefined)} />} </h4>
+
 
     <form className="form" onSubmit={submit}>
 
