@@ -26,9 +26,9 @@ const AdminLogin = () => {
         try {
         const loginAdmin = { email, password };
         const loginRes = await Axios.post(
-            "http://localhost:8080/api/login", {
+            "http://localhost:8080/api/login", 
                 loginAdmin
-            });
+            );
 
             setUserData({
                 token: loginRes.data.token,
