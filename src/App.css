@@ -47,3 +47,15 @@
 .google-p {
     font-weight: bold;
 }
+
+.joinOuterContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}
+
+.join-select-div {
+    margin: 30px 0;
+}

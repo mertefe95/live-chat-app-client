@@ -28,8 +28,7 @@ const Login = () => {
         const loginUser = { email, password };
         const loginRes = await Axios.post(
             "http://localhost:8080/api/login", 
-                loginUser
-                );
+                loginUser);
 
             setUserData({
                 token: loginRes.data.token,
@@ -41,8 +40,6 @@ const Login = () => {
         } catch (err) {
             err.response.data.msg && setError(err.response.data.msg);
         }
-      
-
     }
 
 

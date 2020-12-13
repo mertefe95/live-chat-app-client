@@ -5,6 +5,8 @@ import Footer from "./components/layouts/Footer";
 import Register from "./components/Register";
 import ForgotPassword from "./components/ForgotPassword";
 import Login from "./components/Login";
+import Join from "./components/Join";
+import Chat from "./components/Chat";
 import AdminLogin from "./components/AdminLogin";
 import Homepage from "./components/Homepage";
 
@@ -42,8 +44,6 @@ function App() {
       
       }
     };
-
-
     checkLoggedIn();
   }, []);
 
