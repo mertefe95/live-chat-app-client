@@ -44,7 +44,7 @@ const AdminLogin = () => {
 
 
 return (
-<div className="admin-login-page">
+<div className="page">
     <h2>Admin Login</h2>
 
     <h4>{error && <ErrorNotice message={error} clearError={() => setError(undefined)} />} </h4>
@@ -52,7 +52,7 @@ return (
     <h3>{verifyMessage.text}</h3>
 
 
-    <form className="admin-login-form" onSubmit={submit}>
+    <form className="form" onSubmit={submit}>
 
         <label htmlFor="login-email">Admin Email</label>
         <input id="login-email" type="email" onChange={e => setEmail(e.target.value)} />
