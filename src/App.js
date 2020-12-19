@@ -9,6 +9,7 @@ import Join from "./components/Join";
 import Chat from "./components/Chat";
 import AdminLogin from "./components/AdminLogin";
 import Homepage from "./components/Homepage";
+import SignupSide from "./components/SignUpSide";
 
 import Axios from "axios";
 import UserContext from "./components/context/UserContext";
@@ -62,6 +63,7 @@ function App() {
         <Route exact path="/forgot-password" exact component={ForgotPassword} />
         <Route exact path="/admin-login" exact component={AdminLogin} />
         <Route exact path="/" exact component={Homepage} />
+        <Route exact path="/signupside" exact component={SignupSide} />
       </Switch>
       <Footer />
       </UserContext.Provider>
