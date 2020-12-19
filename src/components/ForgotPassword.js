@@ -23,7 +23,7 @@ const ForgotPassword = () => {
         try {
         const currentUser = { email  };
         await Axios.post(
-            "http://localhost:8080/api/forgot-password", 
+            "http://localhost:8080/users/forgot-password", 
             currentUser
         );
 

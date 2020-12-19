@@ -27,7 +27,7 @@ const Login = () => {
 
         const loginUser = { email, password };
         const loginRes = await Axios.post(
-            "http://localhost:8080/api/login", 
+            "http://localhost:8080/users/login", 
                 loginUser);
 
             setUserData({

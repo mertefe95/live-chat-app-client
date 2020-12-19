@@ -1,39 +1,34 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from "react";
 import queryString from "query-string";
 import io from "socket.io-client";
-import UserContext from "./context/UserContext";
+import { set } from "mongoose";
 
-
+let socket;
 
 const Chat = ({ location }) => {
-  const { userData, setUserData } = useContext(UserContext);
-    console.log(userData)
+  const [name, setName] = useState('');
+  const [room, setRoom] = useState('');
+  const ENDPOINT = 'http://localhost:8080/users'
 
-    const [username, setUsername] = useState('');
-    const [room, setRoom] = useState('');
+  useEffect(() => {
+    const { name, room} = queryString.parse(location.search);
 
-    const ENDPOINT = 'http://localhost:8080'
+    socket = io(ENDPOINT);
+    
+    setName(name);
+    setRoom(room);
+  
+    socket.emit('join', { name, room }, ({ error }) => {
+      alert(error);
+    }); 
 
-    let socket;
+    return () => {
+      socket.emit('disconnect');
+    }
 
-    useEffect(() => {
-        const { username, room } = queryString.parse(location.search)
+  }, [ENDPOINT, location.search]);
 
-        socket = io(ENDPOINT);
-
-        console.log(username);
-        console.log(room);
-
-        setUsername(username);
-        setRoom(room);
-
-        socket.emit('join', { username, room }, ({ error }) => {
-            alert(error);
-        });
-    }, [ENDPOINT, location.search])
-
-    return (
-        <h1>Chat.</h1>
-    )}
-
-export default Chat
+return (
+  <h1>Chat</h1>
+)}
+export default Chat;
